@@ -26,12 +26,24 @@ The long-term goal is to connect the API to an amazing mobile application.
 ## 🛠️ Technology Stack
 
 - **Language:** C#
-- **Framework:** ASP.NET Core Web API
-- **ORM:** Entity Framework Core
+- **Framework:** ASP.NET Core Web API on .NET 10
+- **ORM:** Entity Framework Core with SQLite
 - **Database:** SQLite
 - **API Format:** REST / JSON
-- **API Testing:** Scalar or another compatible API client
+- **API documentation:** OpenAPI and Scalar (development only)
 - **Future Client:** Mobile application
+
+## Development Setup
+
+The API is configured to use SQLite through the `DefaultConnection` setting in
+`appsettings.json`. When running in the Development environment, the app creates
+the database if it does not exist and serves OpenAPI at `/openapi/v1.json` and
+Scalar at `/scalar/v1`.
+
+Database creation and interactive API documentation are intentionally disabled
+outside Development. Before deploying with real data, add and apply EF Core
+migrations rather than relying on `EnsureCreated`; configure the production
+connection string through environment-specific configuration or a secret store.
 
 ## 📚 Development Roadmap
 
@@ -45,9 +57,9 @@ Establish the fundamental API resources and response structures.
 
 ### Module 2 — Persistence and Data Quality
 
-Connect the API to persistent storage and improve request handling.
+Extend the development database setup into production-ready persistence and improve request handling.
 
-- Configure Entity Framework Core and SQLite.
+- Add and apply EF Core migrations for schema changes.
 - Implement database persistence.
 - Add request validation.
 - Implement pagination for collection endpoints.
